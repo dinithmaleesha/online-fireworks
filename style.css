@@ -6,21 +6,22 @@ html, body {
   background: black;
   overflow: hidden;
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Noto Serif Sinhala', sans-serif;
   height: 100%;
   width: 100%;
 }
 
 h1 {
-  margin-top: 10px;
+  margin-top: 20px;
   color: white;
-  font-family: 'Noto Serif Sinhala', sans-serif;
-  font-size: calc(16px + 2vw);
+  font-size: calc(18px + 4vw);
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
 }
 
 canvas {
@@ -34,19 +35,20 @@ canvas {
 
 .button {
   position: fixed;
-  bottom: 10%;
+  bottom: 15%;
   left: 50%;
   transform: translateX(-50%);
-  padding: 15px 30px;
-  font-size: calc(12px + 1.5vw);
+  padding: 20px 40px;
+  font-size: 18px;
   background: #ff4081;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   z-index: 10;
   transition: background 0.3s ease;
   -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
@@ -55,36 +57,42 @@ canvas {
 
 p {
   position: fixed;
-  bottom: 2%;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
   font-size: 14px;
+  color: gray;
   z-index: 10;
 }
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 20px;
-    margin-top: 5px;
+    font-size: 30px;
+    margin-top: 10px;
   }
 
   .button {
-    padding: 10px 20px;
+    padding: 15px 30px;
     font-size: 16px;
-    bottom: 10%;
+    bottom: 20%;
   }
-  
+
   p {
     font-size: 12px;
-    bottom: 5%;
+    bottom: 7%;
   }
 }
 
 @media (max-width: 768px) {
   .button {
-    padding: 12px 25px;
+    padding: 18px 35px;
     font-size: 18px; 
-    bottom: 15%;
+    bottom: 25%;
+  }
+
+  p {
+    font-size: 13px;
+    bottom: 12%;
   }
 }
