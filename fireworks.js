@@ -19,7 +19,7 @@ let accelerating = false;
 let decelerating = false;
 
 const img = new Image();
-img.src = '/assets/circle.png'
+img.src = 'assets/circle.png'
 
 function random(min, max) {
   return Math.random() * (max - min) + min;
