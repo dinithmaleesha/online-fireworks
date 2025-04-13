@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  overflow: hidden;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+h1 {
+  margin-top: 10px;
+  color: white;
+  font-family: 'Noto Serif Sinhala', sans-serif;
+  font-size: calc(16px + 2vw);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.button {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  font-size: calc(12px + 1.5vw);
+  background: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: #e040fb;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .button {
+    padding: 12px 25px;
+    font-size: 18px; 
+  }
+}
