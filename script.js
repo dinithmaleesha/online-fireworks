@@ -23,7 +23,7 @@ button.addEventListener('click', () => {
 
     fireworkSound.play();
 
-    const animationTime = isMobile ? 1500 : 3000;
+    const animationTime = isMobile ? 1000 : 3000;
     
     setTimeout(() => {
       if (fireworks.length > 0) {
@@ -50,7 +50,7 @@ function Firework(x, y, tx, ty) {
   this.tx = tx;
   this.ty = ty;
   this.distance = Math.hypot(tx - x, ty - y);
-  this.speed = isMobile ? 8 : 3;
+  this.speed = isMobile ? 14 : 3;
   this.angle = Math.atan2(ty - y, tx - x);
   this.brightness = random(50, 70);
   this.alpha = 1;
