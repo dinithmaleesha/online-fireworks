@@ -18,8 +18,22 @@ let maxSpinVelocity = 0.3;
 let accelerating = false;
 let decelerating = false;
 
+let imgLoaded = false;
+
 const img = new Image();
 img.src = 'assets/circle.png'
+
+img.onload = () => {
+  console.log('Image loaded')
+  imgLoaded = true;
+  loop();
+};
+
+img.onerror = () => {
+  console.log('Image loaded false')
+  imgLoaded = false;
+  loop();
+};
 
 function random(min, max) {
   return Math.random() * (max - min) + min;
@@ -79,7 +93,7 @@ spinBtn.addEventListener('click', () => {
       accelerating = false;
       decelerating = true;
       spinBtn.innerText = "✨ Spin";
-    }, 5000);
+    }, 8000);
 
   } else {
     accelerating = false;
@@ -89,7 +103,7 @@ spinBtn.addEventListener('click', () => {
 });
 
 function moveCenter() {
-  const movementSpeed = 1;
+  const movementSpeed = 2;
   
   centerX += random(-movementSpeed, movementSpeed);
   centerY += random(-movementSpeed, movementSpeed);
@@ -123,7 +137,14 @@ img.onload = () => {
       const imgWidth = 30;
       const imgHeight = 30;
 
-      ctx.drawImage(img, -imgWidth / 2, -imgHeight / 2, imgWidth, imgHeight);
+      if (imgLoaded) {
+        ctx.drawImage(img, -imgWidth / 2, -imgHeight / 2, imgWidth, imgHeight);
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, 15, 0, Math.PI * 2);
+        ctx.fillStyle = "orange";
+        ctx.fill();
+      }
       ctx.restore();
     }
 
@@ -148,5 +169,3 @@ window.addEventListener('resize', () => {
   centerX = cw / 2;
   centerY = ch / 2;
 });
-
-loop();
