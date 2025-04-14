@@ -56,6 +56,9 @@ function Firework(x, y, tx, ty) {
   this.trail = [];
   this.lastPos = 8;
   this.startTime = Date.now();
+
+  this.motionType = Math.floor(random(0, 3)); // 0 = straight, 1 = arc, 2 = wiggle
+  this.elapsed = 0;
 }
 
 Firework.prototype.update = function(index) {
@@ -71,11 +74,31 @@ Firework.prototype.update = function(index) {
 
   const delta = 1 / 60;
 
-  const vx = Math.cos(this.angle) * this.speed * delta + wobble;
-  const vy = Math.sin(this.angle) * this.speed * delta;
+  this.elapsed += delta;
+
+  let vx = 0;
+  let vy = 0;
+
+  switch (this.motionType) {
+    case 0: // straight
+      vx = Math.cos(this.angle) * this.speed * delta;
+      vy = Math.sin(this.angle) * this.speed * delta;
+      break;
+
+    case 1: // arc
+      vx = Math.cos(this.angle + Math.sin(this.elapsed * 2) * 0.3) * this.speed * delta;
+      vy = Math.sin(this.angle + Math.sin(this.elapsed * 2) * 0.3) * this.speed * delta;
+      break;
+
+    case 2: // spiral
+      vx = Math.cos(this.angle) * this.speed * delta + Math.sin(this.elapsed * 10) * 0.5;
+      vy = Math.sin(this.angle) * this.speed * delta + Math.cos(this.elapsed * 10) * 0.5;
+      break;
+  }
 
   this.x += vx;
   this.y += vy;
+
 
   if (Math.hypot(this.tx - this.x, this.ty - this.y) < 15) {
     fireworks.splice(index, 1);
@@ -106,9 +129,9 @@ function Particle(x, y, color) {
   this.y = y;
   this.speed = random(5, 20);
   this.angle = random(0, Math.PI * 2);
-  this.gravity = 0.05;
+  this.gravity = 2;
   this.friction = 0.95;
-  this.alpha = 1;
+  this.alpha = 2;
   this.decay = random(0.02, 0.05);
   this.color = color;
 }
@@ -132,25 +155,29 @@ Particle.prototype.update = function(index) {
 Particle.prototype.draw = function() {
   ctx.globalAlpha = this.alpha;
   ctx.beginPath();
-  ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+  ctx.arc(this.x, this.y, 0.8, 0, Math.PI * 2) // particle size
   ctx.fillStyle = this.color;
   ctx.fill();
   ctx.globalAlpha = 1;
 };
 
 function explode(x, y) {
-  const numParticles = 150;
-  const fireworkColors = ['white', 'orange', 'yellow'];
+  const numParticles = 350; // number of particles
+  const fireworkColors = ['white', 'orange', 'yellow', 'red',];
 
   for (let i = 0; i < numParticles; i++) {
     const randomColor = fireworkColors[Math.floor(random(0, fireworkColors.length))];
-    particles.push(new Particle(x, y, randomColor));
+    const particle = new Particle(x, y, randomColor);
+    particle.speed = random(2, 10);
+    particles.push(particle);
   }
 }
 
 function loop() {
   ctx.fillStyle = "rgba(0,0,0,0.1)";
   ctx.fillRect(0, 0, cw, ch);
+  ctx.shadowBlur = 10;
+  ctx.shadowColor = this.color;
 
   fireworks.forEach((f, i) => {
     const reachedTarget = f.update(i);
