@@ -61,8 +61,17 @@ p {
   gap: 10px;
 }
 
-button a {
+.bottom-row button a {
   text-decoration: none;
+  color: white;
+  font-size: 1.2em;
+}
+
+.bottom-row button {
+  background-color: #333;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 button {

@@ -43,7 +43,7 @@ class Spark {
   constructor(x, y, angle) {
     this.x = x;
     this.y = y;
-    const speed = random(3, 10);
+    const speed = random(3, 15);
     this.vx = Math.cos(angle) * speed;
     this.vy = Math.sin(angle) * speed;
     this.alpha = 1;
@@ -61,7 +61,7 @@ class Spark {
   draw() {
     ctx.globalAlpha = this.alpha;
     ctx.beginPath();
-    ctx.arc(this.x, this.y, 2, 1, Math.PI * 2);
+    ctx.arc(this.x, this.y, 1.5, 1, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.globalAlpha = 1;
